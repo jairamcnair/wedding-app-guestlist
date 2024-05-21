@@ -15,7 +15,7 @@ app.post("/guests", async(req, res) => {
             "INSERT INTO guest (guest_name, guest_address, guest_phone, guest_count, guest_needhotel, guest_kings, guest_queens, guest_rsvp) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
             [guest_name, guest_address, guest_phone, guest_count, guest_needhotel, guest_kings, guest_queens, guest_rsvp]
         );
-        res.json(newTodo);
+        res.json(newGuest);
     } catch (err) {
         console.error(err.message);
     }
@@ -49,8 +49,8 @@ app.put("/guests/:id", async(req, res) => {
         const { id } = req.params;
         const { guest_name, guest_address, guest_phone, guest_count, guest_needhotel, guest_kings, guest_queens, guest_rsvp} = req.body;
         const updateGuest = await pool.query(
-            "UPDATE fuest SET guest_name=$1, guest_address=$2, guest_phone=$3, guest_count=$4, guest_needhotel=$5, guest_kings=$6, guest_queens=$7, guest_rsvp=$8",
-            [guest_name, guest_address, guest_phone, guest_count, guest_needhotel, guest_kings, guest_queens, guest_rsvp]
+            "UPDATE guest SET guest_name=$1, guest_address=$2, guest_phone=$3, guest_count=$4, guest_needhotel=$5, guest_kings=$6, guest_queens=$7, guest_rsvp=$8 WHERE guest_id=$9",
+            [guest_name, guest_address, guest_phone, guest_count, guest_needhotel, guest_kings, guest_queens, guest_rsvp, id]
         );
         res.json("Guest was updated");
     } catch (err) {
@@ -59,7 +59,7 @@ app.put("/guests/:id", async(req, res) => {
 })
 
 // DELETE GUEST
-app.delete("/todos/:id", async(req, res) => {
+app.delete("/guests/:id", async(req, res) => {
     try {
         const { id } = req.params;
         const deleteGuest = await pool.query("DELETE FROM guest WHERE guest_id = $1", [ id ]);
@@ -68,6 +68,6 @@ app.delete("/todos/:id", async(req, res) => {
         console.error(err.message);
     }
 })
-app.listen(6000, () => {
-    console.log("Server has started on port 6000");
+app.listen(5001, () => {
+    console.log("Server has started on port 5001");
 })
