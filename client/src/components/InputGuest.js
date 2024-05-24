@@ -5,10 +5,10 @@ function InputGuest() {
   const [guest_name, setGuestName] = useState("");
   const [guest_address, setGuestAddress] = useState("");
   const [guest_phone, setGuestPhone] = useState("");
-  const [guest_count, setGuestCount] = useState("");
+  const [guest_count, setGuestCount] = useState("0");
   const [guest_needhotel, setGuestNeedhotel] = useState("false");
-  const [guest_kings, setGuestKings] = useState("");
-  const [guest_queens, setGuestQueens] = useState("");
+  const [guest_kings, setGuestKings] = useState("0");
+  const [guest_queens, setGuestQueens] = useState("0");
   const [guest_rsvp, setGuestRsvp] = useState("false"); 
 
   const checkboxInputHandler = async (e) => {

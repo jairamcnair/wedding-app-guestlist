@@ -31,6 +31,14 @@ const ListGuests = () => {
         getGuests();
     }, []);
 
+    function booleanHandler(param){
+        if(param === "true"){
+            return "yes"
+        }
+        else if (param === "false"){
+            return "no"
+        }
+    }
     //console.log(guests);
 
     return(
@@ -40,6 +48,12 @@ const ListGuests = () => {
                     <tr>
                         <th> Name </th>
                         <th> Address </th>
+                        <th> Phone </th>
+                        <th> Guest Count </th>
+                        <th> Need Hotel </th>
+                        <th> Kings </th>
+                        <th> Queens </th>
+                        <th> RSVP Returned </th>
                         <th> Edit </th>
                         <th> Delete </th>
                     </tr>
@@ -47,10 +61,24 @@ const ListGuests = () => {
                 <tbody>
                     {guests.map(guest => (
                         <tr  key={guest.guest_id}>
+                            <td> {guest.guest_name} </td>
+                            <td> {guest.guest_address} </td>
+                            <td> {guest.guest_phone} </td>
+                            <td> {guest.guest_count} </td>
+                            <td> {booleanHandler(guest.guest_needhotel)}</td>
+                            <td> {guest.guest_kings} </td>
+                            <td> {guest.guest_queens} </td>
+                            <td> {booleanHandler(guest.guest_rsvp)} </td>
+                            <td> <EditGuest guest={guest}/> </td>
+                            <td> <button className="btn btn-danger" onClick={() => deleteGuest(guest.guest_id)}> Delete </button> </td>
+                            
+                            {/*
                             <td> 
                                 <EditGuest guest={guest}/> 
-                                <button className="btn btn-danger" onClick={() => deleteGuest(guest.guest_id)}> Delete </button>
+                                <button className="btn btn-danger h-25" onClick={() => deleteGuest(guest.guest_id)}> Delete </button>
                             </td>
+                            */}
+                            
                             {/*
                             <td> {guest.guest_name} </td>
                             <td> {guest.guest_address} </td>

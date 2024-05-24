@@ -15,6 +15,7 @@ app.post("/guests", async(req, res) => {
             "INSERT INTO guest (guest_name, guest_address, guest_phone, guest_count, guest_needhotel, guest_kings, guest_queens, guest_rsvp) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
             [guest_name, guest_address, guest_phone, guest_count, guest_needhotel, guest_kings, guest_queens, guest_rsvp]
         );
+        console.log(req.body);
         res.json(newGuest);
     } catch (err) {
         console.error(err.message);
@@ -46,7 +47,8 @@ app.get("/guests/:id", async(req, res) => {
 app.put("/guests/:id", async(req, res) => {
     try {
         const { id } = req.params;
-        const { guest_name, guest_address, guest_phone, guest_count, guest_needhotel, guest_kings, guest_queens, guest_rsvp} = req.body;
+        const{ guest_name, guest_address, guest_phone, guest_count, guest_needhotel, guest_kings, guest_queens, guest_rsvp } = req.body;
+
         const updateGuest = await pool.query(
             "UPDATE guest SET guest_name=$1, guest_address=$2, guest_phone=$3, guest_count=$4, guest_needhotel=$5, guest_kings=$6, guest_queens=$7, guest_rsvp=$8 WHERE guest_id=$9",
             [guest_name, guest_address, guest_phone, guest_count, guest_needhotel, guest_kings, guest_queens, guest_rsvp, id]
