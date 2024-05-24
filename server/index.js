@@ -21,11 +21,10 @@ app.post("/guests", async(req, res) => {
     }
 });
 
-
 // SELECT ALL GUESTS
-app.get("/guests", async(res, req) => {
+app.get("/guests", async(req, res) => {
     try {
-        const allGuests = await pool.query("SELECT * from guest");
+        const allGuests = await pool.query("SELECT * FROM guest");
         res.json(allGuests.rows);
     } catch (err) {
         console.error(err.message);

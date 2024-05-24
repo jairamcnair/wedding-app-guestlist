@@ -6,10 +6,10 @@ function InputGuest() {
   const [guest_address, setGuestAddress] = useState("");
   const [guest_phone, setGuestPhone] = useState("");
   const [guest_count, setGuestCount] = useState("");
-  const [guest_needhotel, setGuestNeedhotel] = useState("");
+  const [guest_needhotel, setGuestNeedhotel] = useState("false");
   const [guest_kings, setGuestKings] = useState("");
   const [guest_queens, setGuestQueens] = useState("");
-  const [guest_rsvp, setGuestRsvp] = useState(""); 
+  const [guest_rsvp, setGuestRsvp] = useState("false"); 
 
   const checkboxInputHandler = async (e) => {
     //console.log(e);
@@ -47,7 +47,8 @@ function InputGuest() {
         body: JSON.stringify(body),
       });
 
-      console.log(response);
+      //console.log(response);
+      window.location="/";
     } catch (err) {
       console.error(err.message);
     }
@@ -56,7 +57,7 @@ function InputGuest() {
   return (
     <Fragment>
       <h1 className="text-center mt-5"> Guest List</h1>
-      <form className="d-flex mt-5 w-75 border border-primary" onSubmit={onSubmitForm}>
+      <form className="d-flex mt-5 w-100 border border-primary" onSubmit={onSubmitForm}>
         <div className="w-75 p-3">
             <div className="d-flex mt-3 w-100">
                 <div className="input-group-prepend w-100">
