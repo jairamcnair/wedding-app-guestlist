@@ -1,9 +1,37 @@
 import React from "react";
 import { Fragment, useEffect, useState } from "react";
+import './components.css'
 
 
 
 const EditGuest = ({ guest }) => {
+  const[guests, setGuests] = useState([]);
+
+    const deleteGuest = async (id) => {
+        try {
+            const deleteGuest = await fetch(`http://localhost:5001/guests/${id}`, {
+                method: "DELETE"
+            });
+            setGuests(guests.filter(guest => guest.guest_id !== id));
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
+    const getGuests = async () => {
+      try {
+          const response = await fetch(`http://localhost:5001/guests`);
+          const jsonData = await response.json(); 
+          setGuests(jsonData);
+      } catch (err) {
+          console.error(err.message);
+      }
+  }
+
+  useEffect(() => {
+      getGuests();
+  }, []);
+
   const [guest_name, setGuestName] = useState(guest.guest_name);
   const [guest_address, setGuestAddress] = useState(guest.guest_address);
   const [guest_phone, setGuestPhone] = useState(guest.guest_phone);
@@ -13,7 +41,7 @@ const EditGuest = ({ guest }) => {
   const [guest_queens, setGuestQueens] = useState(guest.guest_queens);
   const [guest_rsvp, setGuestRsvp] = useState(guest.guest_rsvp);
 
-
+  //console.log(guest.guest_id);
   try {
     if (
       guest.guest_needhotel === "true" &&
@@ -59,7 +87,7 @@ const EditGuest = ({ guest }) => {
         guest_queens,
         guest_rsvp
       };
-      console.log(body);
+      //console.log(body);
       const response = await fetch(`http://localhost:5001/guests/${guest.guest_id}`,
         {
           method: "PUT",
@@ -82,19 +110,19 @@ const EditGuest = ({ guest }) => {
     setGuestQueens(guest.guest_queens);
     setGuestRsvp(guest.guest_rsvp);
   }
-  console.log("hey");
+  //console.log("hey");
   return (
     <Fragment>
       
       <button
         type="button"
-        className="btn btn-warning w-25 h-25"
+        className="btn btn-warning w-100 h-100"
         data-toggle="modal"
         data-target={`#id${guest.guest_id}`}
       >
         {guest.guest_name} {/* EDIT */}
       </button>
-      <div className="modal" id={`id${guest.guest_id}`} /*onClick={() => setEverything()}*/>
+      <div className="modal" data-backdrop="static" id={`id${guest.guest_id}`} /*onClick={() => setEverything()}*/>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -103,7 +131,7 @@ const EditGuest = ({ guest }) => {
                 type="button"
                 className="close"
                 data-dismiss="modal"
-                //onClick={() => setEverything()}
+                onClick={() => setEverything()}
               >
                 &times;
               </button>
@@ -162,12 +190,13 @@ const EditGuest = ({ guest }) => {
               <div className="w-100 p-3">
                 <div className="d-flex mt-3 w-100">
                   <div className="input-group-prepend w-100">
-                    <label className="input-group-text w-25">Need Hotel</label>
+                    <label className="input-group-text w-25" htmlFor={guest.guest_id + "nh"}>Need Hotel</label>
+                    
                     <input
                       id={guest.guest_id + "nh"}
                       type="checkbox"
                       //value={guest_needhotel}
-                      className="form-control w-75"
+                      className="form-control w-75 h-45"
                       onChange={(e) => setGuestNeedhotel(e.target.checked)}
                       //onClick={console.log("hey")}
                     />
@@ -209,6 +238,9 @@ const EditGuest = ({ guest }) => {
                       onChange={(e) => setGuestRsvp(e.target.checked)}
                     />
                   </div>
+                </div>
+                <div className="d-flex mt-3 w-100">
+                    <button className="btn btn-danger" onClick={() => deleteGuest(guest.guest_id)}> Delete Guest </button>
                 </div>
               </div>
             </div>
