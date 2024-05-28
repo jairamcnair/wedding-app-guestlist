@@ -28,6 +28,10 @@
     border-radius: 0;
   }
 
+  .edit-name-btn:hover{
+    background-color: #dadada;
+  }
+
   .add-guest-btn{
     height: 40px;
     width: 40px;

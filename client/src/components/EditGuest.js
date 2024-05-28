@@ -100,7 +100,7 @@ const EditGuest = ({ guest, hotel, guest_id}) => {
 
   return (
     <Fragment>
-      <button type="button" className="btn btn-primary w-100 edit-name-btn" data-toggle="modal" data-target={`#id${guest.guest_id}`}>
+      <button type="button" className="btn btn-light w-100 edit-name-btn" data-toggle="modal" data-target={`#id${guest.guest_id}`}>
         {guest.guest_name}
       </button>
 
