@@ -6,27 +6,11 @@ function InputGuest() {
   const [guest_address, setGuestAddress] = useState("");
   const [guest_phone, setGuestPhone] = useState("");
   const [guest_count, setGuestCount] = useState("0");
-  const [guest_needhotel, setGuestNeedhotel] = useState("false");
+  const [guest_needhotel, setGuestNeedhotel] = useState("no");
   const [guest_kings, setGuestKings] = useState("0");
   const [guest_queens, setGuestQueens] = useState("0");
-  const [guest_rsvp, setGuestRsvp] = useState("false"); 
+  const [guest_rsvp, setGuestRsvp] = useState("no"); 
 
-  const checkboxInputHandler = async (e) => {
-    //console.log(e);
-    try {
-      console.log(e.checked);
-      if(e.checked == "true"){
-        guest_needhotel = "yes";
-        console.log(guest_needhotel);
-      }
-      else if(e.checked == "false"){
-        guest_needhotel = "no";
-        console.log(guest_needhotel);
-      }
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
   const onSubmitForm = async (e) => {
     e.preventDefault();
 
@@ -47,7 +31,6 @@ function InputGuest() {
         body: JSON.stringify(body),
       });
 
-      //console.log(response);
       window.location="/";
     } catch (err) {
       console.error(err.message);
@@ -83,12 +66,12 @@ function InputGuest() {
                 </div>
             </div>
         </div>
-        
+
         <div className="w-25 p-3">
             <div className="d-flex mt-3 w-100">
                 <div className="input-group-prepend w-100">
                     <label className="input-group-text w-50"> Need Hotel </label>
-                    <input id="needhotel-cb" type="checkbox" className="form-control w-50" value={guest_needhotel} onChange={(e) => setGuestNeedhotel(e.target.checked)}/>
+                    <input id="needhotel-cb" type="text" className="form-control w-50" value={guest_needhotel} onChange={(e) => setGuestNeedhotel(e.target.value)}/>
                 </div>
             </div>
             <div className="d-flex mt-3 w-100">
@@ -106,11 +89,11 @@ function InputGuest() {
             <div className="d-flex mt-3 w-100">
                 <div className="input-group-prepend w-100">
                     <label className="input-group-text w-50"> RSVP Sent </label>
-                    <input type="checkbox" className="form-control w-50" value={guest_rsvp} onChange={(e) => setGuestRsvp(e.target.checked)}/>
+                    <input type="text" className="form-control w-50" value={guest_rsvp} onChange={(e) => setGuestRsvp(e.target.value)}/>
                 </div>
             </div>
         </div>
-        <button className="btn btn-success"> Add </button>
+        <button className="btn btn-success ml-5"> Add </button>
       </form>
     </Fragment>
   );
