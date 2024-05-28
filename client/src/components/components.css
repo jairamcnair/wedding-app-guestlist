@@ -1,16 +1,46 @@
 
-.grid-container {
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+} 
+
+/*.grid-container {
     display: grid;
     width: 100%;
-    grid-template-columns: 25 25 25;
-    background-color: #2196F3;
+    grid-template-columns: 10 10 10 10;
+    background-color: white;
+  }
+  .grid-item {
+    margin: 15px;
+    background-color: white;
+    font-size: 30px;
+    text-align: center;
+  }*/
+  .grid-container {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
     padding: 10px;
   }
   .grid-item {
-    width: 40%;
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
+    margin: 5px;
     font-size: 30px;
     text-align: center;
+  }
+
+  #edit-name-btn{
+    height: 50px;
+    padding: 5px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 0;
+  }
+
+  .add-guest-btn{
+    height: 40px;
+    width: 40px;
+    border: 1px solid black;
+    font-size: 16px;
   }

@@ -56,7 +56,6 @@ function InputGuest() {
 
   return (
     <Fragment>
-      <h1 className="text-center mt-5"> Guest List</h1>
       <form className="d-flex mt-5 w-100 border border-primary" onSubmit={onSubmitForm}>
         <div className="w-75 p-3">
             <div className="d-flex mt-3 w-100">
