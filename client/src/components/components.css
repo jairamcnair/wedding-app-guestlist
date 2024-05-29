@@ -39,13 +39,6 @@
     font-size: 16px;
   }
 
-  .main { 
-    width: 350px; 
-    height: 200px; 
-    border: 2px solid black; 
-} 
-
-.GFG { 
-    background: green; 
-    color: white; 
-} 
+  .link:hover{
+    text-decoration: none;
+  }
