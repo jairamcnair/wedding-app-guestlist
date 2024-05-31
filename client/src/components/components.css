@@ -42,3 +42,10 @@
   .link:hover{
     text-decoration: none;
   }
+
+
+  input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+    accent-color: rgb(73, 169, 253);
+  }

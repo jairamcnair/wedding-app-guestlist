@@ -9,6 +9,7 @@ import ListGuests from "./components/ListGuests";
 import ListGuests2 from "./components/ListGuests2";
 import PrintGuests from "./components/PrintGuests";
 import PrintLabels from "./components/PrintLabels";
+import ExpenseTracker from "./components/ExpenseTracker";
 
 function App(){
   
@@ -16,6 +17,8 @@ function App(){
     <Router>
       <div>
         <div className="header d-flex justify-content-end border border-primary w-100">
+          <div className="m-4">
+            </div>
             <div className="m-4">
               <button className="btn btn-light border border-primary w"><Link to="/" className="link">Guest List</Link></button>
             </div>
@@ -23,7 +26,10 @@ function App(){
               <button className="btn btn-light border border-primary w"><Link to="/printguests" className="link">Print Guests Information</Link></button>
             </div>
             <div className="m-4">
-              <button className="btn btn-light border border-primary w"><Link to="/printlabels" className="link">Print Invite Labels</Link></button>
+              <button className="btn btn-light border border-primary w"><Link to="/printlabels" className="link">Print Address Labels</Link></button>
+            </div>
+            <div className="m-4">
+              <button className="btn btn-light border border-primary w"><Link to="/expensetracker" className="link">Expense Tracker + Checklist</Link></button>
             </div>
         </div>
       </div>
@@ -31,7 +37,7 @@ function App(){
       <Routes>
         <Route path='/' element={<ListGuests2 />} />
         <Route path='/printguests' element={<PrintGuests />} />
-        <Route path='/printlabels' element={<PrintLabels />} />
+        <Route path='/expensetracker' element={<ExpenseTracker />} />
       </Routes>
     </Router>
   );

@@ -8,6 +8,7 @@ import "./components.css";
 
 const ListGuests2 = () => {
   const [guests, setGuests] = useState([]);
+  
   const getGuests = async () => {
     try {
       const response = await fetch(`http://localhost:5001/guests`);
@@ -68,12 +69,29 @@ const ListGuests2 = () => {
         </div>
       </div>
       <div className="main w-25 border border-primary text-center">
-        <h3 className="display-4"> Tips... </h3>
-        <ul className="list-group">
-          <li className="list-group-item"> You need addresses for save the dates, invitations, thank you cards, and more </li>
-          <li className="list-group-item"> Send out all of your invites at the same time </li>
-          <li className="list-group-item"> Get addresses from </li>
-        </ul>
+        <div className="inner-main text-center">
+          <h3 className="display-4"> Shopping List </h3>
+          <ul className="list-group">
+            <li className="list-group-item"> Stamps - necessary</li>
+            <li className="list-group-item"> Envelopes - necessary</li>
+            <li className="list-group-item"> Invitations -necessary </li>
+            <li className="list-group-item"> RSVP Card - not necessary, but recommended </li>
+            <li className="list-group-item"> Guest Address Labels - not necessary, but handwriting is a lot</li>
+            <li className="list-group-item"> RSVP Return Address Labels - not necessary, but handwriting is a lot</li>
+            <li className="list-group-item"> Decor - not necessary, but adds character<br/>...wax seals, glitter, gold foil flakes, etc. </li>
+          </ul>
+        </div>
+        <div className="inner-main text-center">
+          <h3 className="display-4"> Tips... </h3>
+          <ul className="list-group">
+            <li className="list-group-item"> You need addresses for save the dates, invitations, thank you cards, and more </li>
+            <li className="list-group-item"> With invites, it is smart to put a cap on how many people can come unless you're rich. On the rsvp card, put /5 or /2 so they can fill in the numerator. If it is one person, let them bring a date! If it is a family, account for everyone! </li>
+            <li className="list-group-item"> Send all of your invitations out at the same time to save time and so you don't forget anyone </li>
+            <li className="list-group-item"> Don't forget stamps...stores like CVS have them in the drawer at the register </li>
+            <li className="list-group-item"> <a href="https://www.zazzle.com/c/weddings" target="blank">Zazzle</a> has good prices + quality...</li>
+          </ul>
+        </div>
+        
       </div>
     </div>
     

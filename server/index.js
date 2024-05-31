@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
+const app2 = express();
 const cors = require("cors");
 app.use(cors());
+app2.use(cors());
 app.use(express.json());
+app2.use(express.json());
 
 const pool = require("./db");
 // ROUTES
@@ -69,6 +72,73 @@ app.delete("/guests/:id", async(req, res) => {
         console.error(err.message);
     }
 })
+
+
+
+// CREATE EXPENSE
+app2.post("/expenses", async(req, res) => {
+    try {
+        const{ expense_checked, expense_date, expense_name, expense_cost } = req.body;
+        const newExpense = await pool.query(
+            "INSERT INTO expenses (expense_checked, expense_date, expense_name, expense_cost) VALUES($1, $2, $3, $4) RETURNING *",
+            [expense_checked, expense_date, expense_name, expense_cost]
+        );
+        console.log(req.body);
+        res.json(newExpense);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+// SELECT ALL EXPENSES
+app2.get("/expenses", async(req, res) => {
+    try {
+        const allExpenses = await pool.query("SELECT * FROM expenses");
+        res.json(allExpenses.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+// SELECT EXPENSE BY ID
+app2.get("/expenses/:id", async(req, res) => {
+    try {
+        const { id } = req.params;
+        const expense = await pool.query("SELECT * FROM expenses WHERE expense_id = $1", [ id ]);
+        res.json(expense.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+// UPDATE EXPENSE
+app2.put("/expenses/:id", async(req, res) => {
+    try {
+        const { id } = req.params;
+        const{ expense_checked, expense_date, expense_name, expense_cost } = req.body;
+
+        const updateExpense = await pool.query(
+            "UPDATE expenses SET expense_checked=$1, expense_date=$2, expense_name=$3, expense_cost=$4 WHERE expense_id=$5",
+            [expense_checked, expense_date, expense_name, expense_cost, id]
+        );
+        res.json("Expense was updated");
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+// DELETE EXPENSE
+app2.delete("/expenses/:id", async(req, res) => {
+    try {
+        const { id } = req.params;
+        const deleteExpense = await pool.query("DELETE FROM expenses WHERE expense_id = $1", [ id ]);
+        res.json("Expense was deleted!");
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+
 app.listen(5001, () => {
     console.log("Server has started on port 5001");
+})
+
+app2.listen(5002, () => {
+    console.log("Server has started on port 5002");
 })
