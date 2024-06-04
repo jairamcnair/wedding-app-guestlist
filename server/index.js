@@ -78,10 +78,10 @@ app.delete("/guests/:id", async(req, res) => {
 // CREATE EXPENSE
 app2.post("/expenses", async(req, res) => {
     try {
-        const{ expense_checked, expense_date, expense_name, expense_cost } = req.body;
+        const{ expense_date, expense_name, expense_cost } = req.body;
         const newExpense = await pool.query(
-            "INSERT INTO expenses (expense_checked, expense_date, expense_name, expense_cost) VALUES($1, $2, $3, $4) RETURNING *",
-            [expense_checked, expense_date, expense_name, expense_cost]
+            "INSERT INTO expenses (expense_date, expense_name, expense_cost) VALUES($1, $2, $3) RETURNING *",
+            [expense_date, expense_name, expense_cost]
         );
         console.log(req.body);
         res.json(newExpense);
@@ -115,8 +115,8 @@ app2.put("/expenses/:id", async(req, res) => {
         const{ expense_checked, expense_date, expense_name, expense_cost } = req.body;
 
         const updateExpense = await pool.query(
-            "UPDATE expenses SET expense_checked=$1, expense_date=$2, expense_name=$3, expense_cost=$4 WHERE expense_id=$5",
-            [expense_checked, expense_date, expense_name, expense_cost, id]
+            "UPDATE expenses SET expense_date=$1, expense_name=$2, expense_cost=$3 WHERE expense_id=$4",
+            [expense_date, expense_name, expense_cost, id]
         );
         res.json("Expense was updated");
     } catch (err) {

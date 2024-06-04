@@ -2,7 +2,6 @@ import React from "react";
 import { Fragment, useState } from "react";
 
 function InputExpense() {
-  const [expense_checked, setExpenseChecked] = useState("no");
   const [expense_date, setExpenseDate] = useState("");
   const [expense_name, setExpenseName] = useState("");
   const [expense_cost, setExpenseCost] = useState("0");
@@ -13,7 +12,6 @@ function InputExpense() {
 
     try {
       const body = {
-        expense_checked,
         expense_date,
         expense_name,
         expense_cost,
@@ -41,7 +39,6 @@ function InputExpense() {
         <table className="table mt-5 text-center">
           <thead>
             <tr>
-              <th> Checkbox </th>
               <th> Date </th>
               <th> Expense Item </th>
               <th> Cost </th>
@@ -49,9 +46,6 @@ function InputExpense() {
           </thead>
           <tbody>
             <tr>
-              <td className="align-middle">
-                <input type="checkbox" className="form-control w-75" value={expense_checked} onChange={(e) => {setExpenseChecked(e.target.checked)}}/>
-              </td>
               <td>
                 <input type="date" className="form-control w-75" value={expense_date} onChange={(e) => setExpenseDate(e.target.value)}/>
               </td>

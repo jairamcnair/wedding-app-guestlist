@@ -59,9 +59,6 @@ const EditExpense = ({expense}) =>{
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="align-middle">
-                        <input type="checkbox" id={expense.expense_id} className="form-control w-75" value={expense_checked} onChange={(e) => setExpenseChecked(e.target.checked)}/>
-                      </td>
                       <td>
                         <input type="date" className="form-control w-75" value={expense_date} onChange={(e) => setExpenseDate(e.target.value)}/>
                       </td>
