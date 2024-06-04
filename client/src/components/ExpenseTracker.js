@@ -6,6 +6,24 @@ import EditExpense from "./EditExpense";
 
 
 const ExpenseTracker = () => {
+  
+  const showData = () => {
+    const checkboxes = document.querySelectorAll(".checkboxes");
+    for(let i = 0; i < checkboxes.length; i++){
+      const id = checkboxes[i].id;
+      if(localStorage.getItem(id) === "true"){
+        checkboxes[i].checked = true;
+      }
+      if(localStorage.getItem(id) === "false"){
+        checkboxes[i].checked = false;
+      }
+    }
+  }
+  //showData();
+
+  // pass showData to the App.js file?
+
+ 
   const [expenses, setExpenses] = useState([]);
   
   const getExpenses = async () => {
@@ -29,11 +47,33 @@ const ExpenseTracker = () => {
         method: "DELETE",
       });
       setExpenses(expenses.filter((expense) => expense.expense_id !== id));
+      localStorage.removeItem(id);
       window.location="/expensetracker";
     } catch (err) {
       console.error(err.message);
     }
   };
+
+  const updateStorage = (id, state) => {
+    localStorage.setItem(id, state);
+    window.location="/expensetracker"; // need to reload so the localStorage value updates
+    //console.log(state)
+    //document.getElementById(id).checked = state;
+    /*DON'T NEED
+    if(state === true){
+      console.log("true");
+      localStorage.setItem(id, "true");
+    }
+    else if(state === false){
+      console.log("false");
+      localStorage.setItem(id, "false");
+    }*/
+  }
+
+  const showChecked = (id) =>{
+    JSON.parse(localStorage.getItem(id))
+  }
+
   
 
   return (
@@ -52,9 +92,9 @@ const ExpenseTracker = () => {
             </tr>
           </thead>
           <tbody>
-          {expenses.map((expense) => (
+          {expenses.map((expense) => (  
             <tr key={expense.expense_id}>
-              <td className="align-middle">{expense.expense_checked}</td>
+              <td className="align-middle"><input type="checkbox" className="checkboxes" id={expense.expense_id} onChange={e=>updateStorage(e.target.id, e.target.checked)} checked={JSON.parse(localStorage.getItem(expense.expense_id))}/></td>
               <td className="align-middle">{expense.expense_date}</td>
               <td className="align-middle">{expense.expense_name}</td>
               <td className="align-middle">{expense.expense_cost}</td>
@@ -84,8 +124,8 @@ const ExpenseTracker = () => {
               </div>
             </div>
           </div>
+          {showData()}
     </Fragment>
   );
-  
 };
 export default ExpenseTracker;

@@ -31,11 +31,6 @@ function InputExpense() {
     }
   };
 
-  // need to make it input yes into database if true and no if false
-  function handleCheck(param){
-    //console.log(param.checked);
-    console.log(param.id);
-  }
 
   return (
     <Fragment>
@@ -55,7 +50,7 @@ function InputExpense() {
           <tbody>
             <tr>
               <td className="align-middle">
-                <input type="checkbox" className="form-control w-75" value={expense_checked} onChange={(e) => {setExpenseChecked(handleCheck(e.target));}}/>
+                <input type="checkbox" className="form-control w-75" value={expense_checked} onChange={(e) => {setExpenseChecked(e.target.checked)}}/>
               </td>
               <td>
                 <input type="date" className="form-control w-75" value={expense_date} onChange={(e) => setExpenseDate(e.target.value)}/>

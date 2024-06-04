@@ -5,7 +5,6 @@ import InputExpense from "./InputExpense";
 
 const EditExpense = ({expense}) =>{
     const [expenses, setExpenses] = useState([]);
-
     const [expense_checked, setExpenseChecked] = useState(expense.expense_checked);
     const [expense_date, setExpenseDate] = useState(expense.expense_date);
     const [expense_name, setExpenseName] = useState(expense.expense_name);
@@ -61,7 +60,7 @@ const EditExpense = ({expense}) =>{
                   <tbody>
                     <tr>
                       <td className="align-middle">
-                        <input type="checkbox" className="form-control w-75" value={expense_checked} onChange={(e) => setExpenseChecked(e.target.checked)}/>
+                        <input type="checkbox" id={expense.expense_id} className="form-control w-75" value={expense_checked} onChange={(e) => setExpenseChecked(e.target.checked)}/>
                       </td>
                       <td>
                         <input type="date" className="form-control w-75" value={expense_date} onChange={(e) => setExpenseDate(e.target.value)}/>
